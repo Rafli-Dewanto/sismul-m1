@@ -25,7 +25,33 @@ class M_welcome extends CI_Model{
         } 
         return $this->db->get('post')->result_array();
     }
-    
+
+    // pertemuan 4
+    public function update($id, $filename = "") {
+        if ($filename != "") {
+            $data = array(
+                'name' => $this->input->post('name', TRUE),
+                'description' => $this->input->post('description',TRUE),
+                'filename' => $filename
+            );
+        }else{
+            $data = array(
+                'name' => $this->input->post('name', TRUE),
+                'description' => $this->input->post('description',TRUE)
+            );
+        }
+        $this->db->where('id', $id);
+        $this->db->update('post', $data);
+    }
+
+    public function delete($id){
+        $this->db->where('id', $id);
+        $this->db->delete('post');
+    }
+
+    public function deleteAll(){
+        $this->db->empty_table('post');
+    }
 }
 
 ?>
