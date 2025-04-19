@@ -11,11 +11,20 @@ class Welcome extends CI_Controller {
 	}
 
 
-	public function index()
+	public function index($id=false)
 	{
-		$this->load->view('header');
-		$this->load->view('home');
-		$this->load->view('footer');
+		if($id===false){
+			$data['home_post']=$this->model->read();
+			$this->load->view('header');
+			$this->load->view('home',$data);
+			$this->load->view('footer');
+		}
+		else {
+			$data['post']=$this->model->read($id);
+			$this->load->view('header');
+			$this->load->view('post',$data);
+			$this->load->view('footer');
+		}
 	}
 
 	public function create($id = false)

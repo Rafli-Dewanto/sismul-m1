@@ -13,6 +13,18 @@ class M_welcome extends CI_Model{
         ];
         $this->db->insert('post', $data);
     }
+
+    public function read($id=false){
+        if ($id===false){
+            //pertemuan 2
+            return $this->db->get('post')->result_array();
+        }
+        else {
+            $query = $this->db->get_where('post',array('id'=>$id));
+            return $query->row();
+        } 
+        return $this->db->get('post')->result_array();
+    }
     
 }
 
